@@ -46,7 +46,6 @@ namespace BackpropagationNN
         
         private void GradientCalculation(double[] trainOutput)
         {
-            // now only for Cross entropy. To do for L2 norm error same procedure.
             double[,] tmp;
             double[] sigDer;
             for(int i=0;i<trainOutput.Length;i++)
@@ -61,7 +60,7 @@ namespace BackpropagationNN
                 for(int j=layers.Length-2;j>=0;j--)
                 {
                     tmp= MultiplicationFunctions.multiplyMatrix(MultiplicationFunctions.matrixTranspose(layers[j + 1].weights), MultiplicationFunctions.arrayToMatrix(layers[j + 1].biasDerivative));
-                    sigDer = ActivationFunctions.SigmoidDerivative(ActivationFunctions.Sigmoid(layers[j].sumVector));
+                    sigDer = ActivationFunctions.SigmoidDerivative(ActivationFunctions.Sigmoid(layers[j].sumVector)); //add tanh
                     layers[j].biasDerivative= MultiplicationFunctions.matrixToArray(tmp).Select((elem, index) => elem * sigDer[index]).ToArray();
                     layers[j].weightDerivative = MultiplicationFunctions.multiplyVectors(layers[j].biasDerivative, layers[j].inputs);  
                 }
@@ -131,9 +130,9 @@ namespace BackpropagationNN
         public void Train(double[][] trainInput, double[][] trainOutput,int epoch,double learning_rate,double momentum)
         {
             double Error=1000,newError;
-            bool useMomentum=true;
             for(int i=0;i<epoch;i++)
             {
+                Error = 1000;
                 for(int j=0;j<trainInput.GetLength(0);j++)
                 {
                     ForwardPass(trainInput[i]);
@@ -147,6 +146,7 @@ namespace BackpropagationNN
                     if (newError<1.05*Error)
                     {
                         weightAdjustment(momentum);
+                        Error = newError;
                     }
                     else
                     {
@@ -154,12 +154,12 @@ namespace BackpropagationNN
                         RestoreAndAdjustment(momentum);
 
                     }
+                   
                     
-
-                    Error = newError;
                     //ErrorFunctions.Cross_Entropy(trainOutput[j], layers[layers.Length - 1].outputs);
-                    Console.WriteLine($"Error is {ErrorFunctions.Cross_Entropy(trainOutput[j], layers[layers.Length - 1].outputs)}");
+                    Console.WriteLine($"Error is {Error}");
                 }
+
             }
         }
 
