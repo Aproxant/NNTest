@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32002.261
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NNTest", "NNTest\NNTest.csproj", "{C7553656-F6A5-41AE-9106-CC3E58E2FAFF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C7553656-F6A5-41AE-9106-CC3E58E2FAFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7553656-F6A5-41AE-9106-CC3E58E2FAFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7553656-F6A5-41AE-9106-CC3E58E2FAFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7553656-F6A5-41AE-9106-CC3E58E2FAFF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6B17F065-A2B6-4D4F-B181-CF0855FF3136}
+	EndGlobalSection
+EndGlobal
