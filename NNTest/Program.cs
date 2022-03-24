@@ -19,6 +19,8 @@ namespace NNTest
 
             trainTest = DataPreparation.SchufleData(trainTest,30);
 
+            var final = DataPreparation.train_and_test(trainTest,0.7);
+
             int[] networkStruc = { trainTest.Item1[0].Length,2,trainTest.Item2[0].Length };
 
             var neuron=new NeuralNetwork(networkStruc);

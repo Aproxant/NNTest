@@ -78,6 +78,49 @@ namespace NNTest
             return new Tuple<double[][], double[][]>(train, testFinal);
         }
 
+        public static Tuple<double[][],double[][], double[][],double[][]> train_and_test(Tuple<double[][], double[][]> data,double split )
+        {
+            int trainSize = (int)Math.Floor(data.Item1.Length*split);
+            int testSize = data.Item1.Length - trainSize;
+
+            double[][] train = new double[trainSize][];
+
+            double[][] test = new double[testSize][];
+
+            double[][] train_final = new double[trainSize][];
+
+            double[][] test_final = new double[testSize][];
+
+            for(int i=0;i<trainSize;i++)
+            {
+                train[i] = new double[data.Item1[i].Length];
+                train_final[i] = new double[data.Item2[i].Length];
+                for(int j=0;j< data.Item1[i].Length;j++)
+                {
+                    train[i][j] = data.Item1[i][j];                    
+                }
+                for(int j = 0; j < data.Item2[i].Length; j++)
+                {
+                    train_final[i][j] = data.Item2[i][j];
+                }
+            }
+
+            for (int i = 0; i < testSize; i++)
+            {
+                test[i] = new double[data.Item1[i].Length];
+                test_final[i] = new double[data.Item2[i].Length];
+                for (int j = 0; j < data.Item1[i].Length; j++)
+                {
+                    test[i][j] = data.Item1[i][j];
+                }
+                for (int j = 0; j < data.Item2[i].Length; j++)
+                {
+                    test_final[i][j] = data.Item2[i][j];
+                }
+            }
+            return new Tuple<double[][], double[][], double[][], double[][]>(train, train_final, test, test_final);
+        }
+
 
 
     }
