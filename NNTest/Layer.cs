@@ -11,6 +11,8 @@ namespace BackpropagationNN
         public int nrIpnut;
         public int nrOutput;
 
+        public ActivationFunc func;
+
         public double[] inputs;
         public double[] outputs; //a
 
@@ -37,10 +39,12 @@ namespace BackpropagationNN
 
         private static Random rnd=new Random();
         
-        public Layer(int _in,int _out)
+        public Layer(int _in,int _out,ActivationFunc _func)
         {
             nrIpnut = _in;
             nrOutput = _out;
+
+            func = _func;
 
             inputs = new double[nrIpnut];
             outputs = new double[nrOutput];
@@ -114,13 +118,13 @@ namespace BackpropagationNN
                 }
                 outputs[i] += biases[i];
                 sumVector[i] = outputs[i]; 
-                outputs[i] = Sigmoid(outputs[i]);
             }
+            if (ActivationFunc.Sigmoid == func)
+                outputs = ActivationFunctions.Sigmoid(outputs);
+            else if (ActivationFunc.Softmax == func)
+                outputs = ActivationFunctions.SoftMax(outputs);
         }
-        private double Sigmoid(double x)
-        {
-            return 1f / (1f + Math.Exp(-x));
-        }
+
 
 
 

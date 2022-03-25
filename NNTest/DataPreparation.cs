@@ -111,11 +111,11 @@ namespace NNTest
                 test_final[i] = new double[data.Item2[i].Length];
                 for (int j = 0; j < data.Item1[i].Length; j++)
                 {
-                    test[i][j] = data.Item1[i][j];
+                    test[i][j] = data.Item1[trainSize+i][j];
                 }
                 for (int j = 0; j < data.Item2[i].Length; j++)
                 {
-                    test_final[i][j] = data.Item2[i][j];
+                    test_final[i][j] = data.Item2[trainSize+i][j];
                 }
             }
             return new Tuple<double[][], double[][], double[][], double[][]>(train, train_final, test, test_final);

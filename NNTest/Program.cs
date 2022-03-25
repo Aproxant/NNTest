@@ -17,11 +17,12 @@ namespace NNTest
 
             var trainTest = DataPreparation.Split_data(data);
 
-            trainTest = DataPreparation.SchufleData(trainTest,30);
+            trainTest = DataPreparation.SchufleData(trainTest,1000);
 
             var final = DataPreparation.train_and_test(trainTest,0.7);
 
-            int[] networkStruc = { trainTest.Item1[0].Length,2,trainTest.Item2[0].Length };
+            int[] networkStruc = { trainTest.Item1[0].Length,10,8,7,trainTest.Item2[0].Length };
+
 
             var neuron=new NeuralNetwork(networkStruc);
             neuron.Train(final, 1000, 0.1,0.9);
