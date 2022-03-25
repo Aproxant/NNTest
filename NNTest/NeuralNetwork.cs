@@ -27,7 +27,7 @@ namespace BackpropagationNN
 
 
        
-        private void ForwardPass(double[] inputs)
+        private double[] ForwardPass(double[] inputs)
         {
             for(int i=0;i<layers[0].inputs.Length;i++)
             {
@@ -40,6 +40,8 @@ namespace BackpropagationNN
                     break;
                 layers[i + 1].inputs = layers[i].outputs;
             }
+            layers[layers.Length - 1].outputs = ActivationFunctions.SoftMax(layers[layers.Length - 1].outputs);
+            return layers[layers.Length - 1].outputs;
         }
 
 
@@ -125,11 +127,26 @@ namespace BackpropagationNN
                 }
             }
         }
+        public double ErrorOnTest(double[][] input, double[][] output)
+        {
+            double[] result;
+            double error = 0;
+            for(int i=0;i<input.Length;i++)
+            {
+                result=ForwardPass(input[i]);
+                error+=ErrorFunctions.Cross_Entropy(output[i], result);
+            }
+            return error / input.Length;
+        }
 
 
-        public void Train(double[][] trainInput, double[][] trainOutput,int epoch,double learning_rate,double momentum)
+        public void Train(Tuple<double[][], double[][], double[][], double[][]> data,int epoch,double learning_rate,double momentum)
         {
             double Error=1000,newError;
+            double[][] trainInput = data.Item1;
+            double[][] trainOutput = data.Item2;
+            double[][] testInput = data.Item3;
+            double[][] testOutput = data.Item4;
             for(int i=0;i<epoch;i++)
             {
                 Error = 1000;
@@ -157,9 +174,9 @@ namespace BackpropagationNN
                    
                     
                     //ErrorFunctions.Cross_Entropy(trainOutput[j], layers[layers.Length - 1].outputs);
-                    Console.WriteLine($"Error is {Error}");
+                    //Console.WriteLine($"Error is {Error}");
                 }
-
+                Console.WriteLine($"Error on train is {ErrorOnTest(testInput, testOutput)}");
             }
         }
 

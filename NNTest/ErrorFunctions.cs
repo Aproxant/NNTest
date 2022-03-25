@@ -27,5 +27,6 @@ namespace BackpropagationNN
             }
             return error_sum;
         }
+
     }
 }

@@ -24,7 +24,7 @@ namespace NNTest
             int[] networkStruc = { trainTest.Item1[0].Length,2,trainTest.Item2[0].Length };
 
             var neuron=new NeuralNetwork(networkStruc);
-            neuron.Train(trainTest.Item1, trainTest.Item2, 5, 0.1,0.9);
+            neuron.Train(final, 1000, 0.1,0.9);
 
             return;
         }

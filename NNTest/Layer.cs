@@ -33,6 +33,8 @@ namespace BackpropagationNN
         public double[] biases;
         public double[] biasesCorrection;
 
+        private double[][,] pastWeights;
+
         private static Random rnd=new Random();
         
         public Layer(int _in,int _out)
@@ -65,8 +67,18 @@ namespace BackpropagationNN
 
             learningRateBiases = new double[nrOutput];
 
-            InitWeightsAndBiases();
+            pastWeights = new double[5][,];
 
+            InitWeightsAndBiases();
+            for (int i = 0; i < 5; i++)
+            {
+                pastWeights[i] = new double[nrOutput, nrIpnut];
+                for (int j = 0; j < nrOutput; j++)
+                    for (int k = 0; k < nrIpnut; k++)
+                    {
+                        pastWeights[i][j, k] = 0;
+                    }
+            }
         }
         private double GetRandomNumber(double minimum, double maximum)
         {
@@ -85,6 +97,7 @@ namespace BackpropagationNN
                     prevWeights[i, j] = weights[i, j];
                     deltaWeight[i, j] = 0;
                     weightOmega[i, j] = 0;
+                    
                 }
             }
         }

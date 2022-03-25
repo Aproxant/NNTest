@@ -27,5 +27,15 @@ namespace BackpropagationNN
             }
             return res;
         }
+        public static double[] SoftMax(double[] normalizeOuputs)
+        {
+            double[] resNorm = new double[normalizeOuputs.Length];
+            double sum = normalizeOuputs.Sum(x => Math.Exp(x));
+            for (int i = 0; i < normalizeOuputs.Length; i++)
+            {
+                resNorm[i] = Math.Exp(normalizeOuputs[i]) / sum;
+            }
+            return resNorm;
+        }
     }
 }
